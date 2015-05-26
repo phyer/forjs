@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="js/aws-sdk.js"></script>
+        <script src="js/aws-sdk-mobile-analytics.js"></script>
+    </head>
+    <body>
+        <script>
+            var COGNITO_IDENTITY_POOL = 'us-east-1:7b955a83-0de6-44f5-bada-fa18c058ff16';
+            AWS.config.region = 'us-east-1';
+            AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+                    IdentityPoolId: COGNITO_IDENTITY_POOL
+            });
+
+            var options = {
+                    appId: '73554a1e21b149268a5889c24b8c79a7', //Mobile Analytics App ID
+                    sessionLength: 300000            //Session Length in milliseconds.  This will evaluate to 5min.
+            };
+            var mobileAnalyticsClient = new AMA.Manager(options);
+            mobileAnalyticsClient.submitEvents();
+        </script>
+    </body>
+</html>
